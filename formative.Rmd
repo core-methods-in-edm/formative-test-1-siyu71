@@ -1,0 +1,48 @@
+---
+title: "formative"
+author: "SIyu Song"
+date: "2017年10月5日"
+output: html_document
+---
+```{r}
+D1 <- read.csv('C:/Users/Siyu/Downloads/MITHARVARD.csv',header = TRUE)
+D1 <- as.data.frame(D1)
+```
+```{r}
+#DI stands for 'De-Identified'. 
+```
+
+```{r}
+library(dplyr)
+library(tidyr)
+
+```
+```{r}
+D1 %>%
+  group_by(course_id, certified) %>%
+  count
+# The answer is 1287.
+```
+
+```{r}
+D1 %>%
+  group_by(course_id, final_cc_cname_DI, start_time_DI) %>%
+  count
+
+# The answer is 10.
+```
+
+```{r}
+D2 <- filter(D1, final_cc_cname_DI == 'China')
+D2 <- select(D2, userid_DI, start_time_DI)
+```
+
+```{r}
+D1$registered <- ifelse(D1$registered == 1, 1, NA)
+D3 <- select(D1, start_time_DI, userid_DI, registered)
+D3 <- spread(D3, start_time_DI, registered)
+```
+```{r}
+# Could not continue with Q#10.
+```
+
